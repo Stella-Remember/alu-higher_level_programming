@@ -15,4 +15,4 @@ if __name__ == "__main__":
     data = resp.json()
     for commit in data[0:10]:
         print(commit.get('sha'), end=': ')
-        print(commit.get('commit').get('author').get('name'))
+        print(commit.get('commit').get('author').get('name')))
