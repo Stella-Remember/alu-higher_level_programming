@@ -1,14 +1,18 @@
 #!/usr/bin/python3
 """
-Module 0-hbtn_status.py
+Module 100-github_commits.py
 """
 
-import urllib.request
+
+from sys import argv
+import requests
+
 
 if __name__ == "__main__":
-    with urllib.request.urlopen('https://intranet.hbtn.io/status') as response:
-        html = response.read()
-        print('Body response:')
-        print("\t- type: {}".format(type(html)))
-        print("\t- content: {}".format(html))
-        print("\t- utf8 content: {}".format(html.decode('utf-8')))
+    url = 'https://api.github.com/repos/{}/{}/commits'.format(
+            argv[2], argv[1])
+    resp = requests.get(url)
+    data = resp.json()
+    for commit in data[0:10]:
+        print(commit.get('sha'), end=': ')
+        print(commit.get('commit').get('author').get('name'))
